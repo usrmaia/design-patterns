@@ -1,28 +1,23 @@
-import { Originator } from './originator';
+import { ConcreteOriginator } from './concreteOriginator';
 import { Memento } from './models/memento';
 
-/**
- * The Caretaker doesn't depend on the Concrete Memento class. Therefore, it
- * doesn't have access to the originator's state, stored inside the memento. It
- * works with all mementos via the base Memento interface.
- */
 class Caretaker {
-    private mementos: Array<Memento> = [];
-    private originator: Originator;
+    private history: Array<Memento> = [];
+    private originator: ConcreteOriginator;
 
-    constructor(originator: Originator) {
+    constructor(originator: ConcreteOriginator) {
         this.originator = originator;
     }
 
     public backup(): void {
         console.log('\nCaretaker: Saving Originator\'s state...');
-        this.mementos.push(this.originator.save());
+        this.history.push(this.originator.save());
     }
 
     public undo(): void {
-        if (!this.mementos.length) return;
+        if (!this.history.length) return;
 
-        const memento: Memento | any = this.mementos.pop();
+        const memento: Memento | any = this.history.pop();
 
         console.log(`Caretaker: Restoring state to: ${memento.getName()}`);
         this.originator.restore(memento);
@@ -30,7 +25,7 @@ class Caretaker {
 
     public showHistory(): void {
         console.log('Caretaker: Here\'s the list of mementos:');
-        for (const memento of this.mementos) {
+        for (const memento of this.history) {
             console.log(memento.getName());
         }
     }

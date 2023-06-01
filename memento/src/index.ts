@@ -1,7 +1,7 @@
-import { Originator } from "./originator";
+import { ConcreteOriginator } from "./concreteOriginator";
 import { Caretaker } from "./caretaker";
 
-const originator = new Originator('Super-duper-super-puper-super.');
+const originator = new ConcreteOriginator('Radom String');
 const caretaker = new Caretaker(originator);
 
 caretaker.backup();
@@ -21,3 +21,6 @@ caretaker.undo();
 
 console.log('\nClient: Once more!\n');
 caretaker.undo();
+
+console.log('');
+caretaker.showHistory();

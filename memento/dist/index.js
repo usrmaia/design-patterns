@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const originator_1 = require("./originator");
+const concreteOriginator_1 = require("./concreteOriginator");
 const caretaker_1 = require("./caretaker");
-const originator = new originator_1.Originator('Super-duper-super-puper-super.');
+const originator = new concreteOriginator_1.ConcreteOriginator('Radom String');
 const caretaker = new caretaker_1.Caretaker(originator);
 caretaker.backup();
 originator.doSomething();
@@ -16,3 +16,5 @@ console.log('\nClient: Now, let\'s rollback!\n');
 caretaker.undo();
 console.log('\nClient: Once more!\n');
 caretaker.undo();
+console.log('');
+caretaker.showHistory();
